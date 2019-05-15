@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>A Simple Page with CKEditor</title>
+    </head>
+    <body>
+            <textarea name="editor" id="editor" rows="10" cols="80">
+                    This is the editor content.
+            </textarea>
+                      
+    </body>
+    <script src="../node_modules/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'editor' );
+    </script>
+</html>
