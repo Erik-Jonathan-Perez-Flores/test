@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <meta charset="utf-8">
+                <title>Editor de Texto</title>
+                <script src="https://cdn.ckeditor.com/4.11.4/full-all/ckeditor.js"></script>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        </head>
+        <style>
+                body{
+                    background: #1c92d2;  /* fallback for old browsers */
+                    background: -webkit-linear-gradient(to right, #f2fcfe, #1c92d2);  /* Chrome 10-25, Safari 5.1-6 */
+                    background: linear-gradient(to right, #f2fcfe, #1c92d2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                }
+                </style>
+        <body>
+                <nav class="navbar navbar-dark bg-dark">
+                        <a class="navbar-brand" href="/">Atras</a>
+                        <a class="navbar-brand" href="EditCod">Codigo</a>
+                      </nav>
+                <textarea name="Guias de Laboratorio" ></textarea>
+                <script>
+                        CKEDITOR.replace( 'Guias de Laboratorio' ,{
+                            language: 'es',
+                            uiColor: '#aaaaaa',
+                            extraPlugins: 'mathjax',
+                            mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
+                            height: 439,
+                            
+                        });         
+                        CKEDITOR.editorConfig = function( config ) {
+                            
+                    };
+                </script>
+        </body>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -18,6 +18,16 @@ app.get('/', (req,res)=>{
     res.render('index');
 })
 
+
+app.get('/EditText', (req,res)=>{
+    res.render('EditText');
+})
+
+app.get('/EditCod', (req,res)=>{
+    res.render('EditCod');
+})
+
+
 app.listen(app.get('port'),()=>{
     console.log(`servidor en puerto ${app.get('port')}`)
 });
