@@ -18,14 +18,27 @@
                         <a class="navbar-brand" href="/">Atras</a>
                         <a class="navbar-brand" href="EditCod">Codigo</a>
                       </nav>
-                <textarea name="Guias de Laboratorio" ></textarea>
+                <form action="/api/params" method="POST" >
+                      <textarea name="GuiasdeLaboratorio"></textarea>
+                      <div class="form-row">
+                                <div class="col">
+                                  <input type="text" name="titulo" class="form-control" placeholder="Insertar titulo">
+                                </div>
+                                <div class="col">
+                                  <button type="submit" class="btn btn-primary form-control">Guardar</button> 
+                                </div>
+                              </div>
+                      
+                      
+                </form>
+                
                 <script>
-                        CKEDITOR.replace( 'Guias de Laboratorio' ,{
+                        CKEDITOR.replace( 'GuiasdeLaboratorio' ,{
                             language: 'es',
                             uiColor: '#aaaaaa',
                             extraPlugins: 'mathjax',
                             mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
-                            height: 439,
+                            height: 385,
                             
                         });         
                         CKEDITOR.editorConfig = function( config ) {
