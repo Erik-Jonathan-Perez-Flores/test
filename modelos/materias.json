@@ -1,0 +1,14 @@
+  {
+    "params": [
+    {
+    "_id": "5ce0c28ee29dce4bdfb61c49",
+    "nombre": "Programacion-1",
+    "sigla": "SIS-100"
+    },
+    {
+      "_id": "5ce0c28ee29dce2bdfb61c49",
+      "nombre": "Programacion-2",
+      "sigla": "SIS-200"
+      }
+  ]
+}

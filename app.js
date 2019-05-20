@@ -24,6 +24,18 @@ app.get('/', (req,res)=>{
 app.get('/index', (req,res)=>{
     res.render('index');
 })
+app.get('/MostrPrac', (req,res)=>{
+    Params.find({},(err, datos)=>{
+        params = datos.map(data=>({
+            id:data._id,
+            titulo:data.titulo,
+            cuerpo:data.cuerpo 
+        }));
+        if(err) return res.status(500).send({message:`Error::::::: ${err}`})
+    });
+    
+    res.render('MostrPrac', { params });
+})
 
 
 app.get('/EditText', (req,res)=>{
@@ -70,6 +82,8 @@ app.post('/api/params', (req,res) =>{
 
         res.status(200).send({params: paramsStored})
     })
+
+    res.redirect('/MostrPrac');
 })
 app.put('/api/params/:pId', (req,res) =>{
 
