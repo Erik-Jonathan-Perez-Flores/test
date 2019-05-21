@@ -2,9 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose')
 
-const Params = require('./modelos/params.js')
+const Practica = require('./modelos/practicas.js')
+const Materia = require('./modelos/materias.js')
 
 const app = express();
 
@@ -18,23 +18,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.get('/', (req,res)=>{
-    res.render('MostrMate');
+    Materia.find({},(err, materia)=>{
+        if(err) return res.status(500).send({message:`Error al realizar la peticion: ${err}`})
+        if(!materia) return res.status(404).send({message:`El producto no existe`})
+        res.render('MostrMate', { materia })
+    }) 
 })
-
-app.get('/index', (req,res)=>{
-    res.render('index');
-})
-app.get('/MostrPrac', (req,res)=>{
-    Params.find({},(err, datos)=>{
-        params = datos.map(data=>({
-            id:data._id,
+app.get('/MostrPrac', function(req, res){
+    console.log("ENTER TO SERVICE");
+    Practica.find({},(err, practicas)=>{
+         var practicas = practicas.map(data=>({
             titulo:data.titulo,
-            cuerpo:data.cuerpo 
-        }));
-        if(err) return res.status(500).send({message:`Error::::::: ${err}`})
+            texto:data.texto
+        }))
+        if(err) return res.status(500).send({message:`Error al realizar la peticion: ${err}`})
+        if(!practicas) return res.status(404).send({message:`El producto no existe`})
+        console.log(practicas);
+        //res.status(200).json({msn: practicas});
+        res.render('MostrPrac', { practicas })
     });
-    
-    res.render('MostrPrac', { params });
+      
 })
 
 
@@ -49,56 +52,81 @@ app.get('/EditCod', (req,res)=>{
 ///////////////////////
 
 
-app.get('/api/params', (req,res) =>{
+app.get('/api/practicas', (req,res) =>{
 
-    Params.find({},(err, params)=>{
+    Practica.find({},(err, practicas)=>{
         if(err) return res.status(500).send({message:`Error al realizar la peticion: ${err}`})
-        if(!params) return res.status(404).send({message:`El producto no existe`})
-        res.send(200, { params })
+        if(!practicas) return res.status(404).send({message:`El producto no existe`})
+        res.send(200, { practicas })
     })            
 })
 
-app.get('/api/params/:pId', (req,res) =>{
-    let pId = req.params.pId
+app.get('/api/materia', (req,res) =>{
 
-    Params.findById(pId,(err,params)=> {
+    Materia.find({},(err, materia)=>{
         if(err) return res.status(500).send({message:`Error al realizar la peticion: ${err}`})
-        if(!params) return res.status(404).send({message:`El producto no existe`})
-        res.status(200).send({params})
+        if(!materia) return res.status(404).send({message:`El producto no existe`})
+        res.send(200, { materia })
+    })            
+})
+
+app.get('/api/practicas/:pId', (req,res) =>{
+    let pId = req.practicas.pId
+
+    Practicas.findById(pId,(err,practicas)=> {
+        if(err) return res.status(500).send({message:`Error al realizar la peticion: ${err}`})
+        if(!practicas) return res.status(404).send({message:`El producto no existe`})
+        res.status(200).send({practicas})
     })
 })
 
-app.post('/api/params', (req,res) =>{
+app.post('/api/practicas', (req,res) =>{
     
     console.log(req.body)
-    let params = new Params()
-    params.autor =  req.body.autor
-    params.materia = req.body.materia
-    params.titulo = req.body.titulo
-    params.cuerpo = req.body.GuiasdeLaboratorio
-
-    params.save((err, paramsStored)=>{
+    let practica = new Practica()
+    practica.titulo =  req.body.titulo;
+    practica.texto =  req.body.texto;
+    practica.save((err, practicaStored)=>{
         if(err) res.status(500).send({message:`Error al guardar en la BD ${err}`})
 
-        res.status(200).send({params: paramsStored})
+        res.status(200).send({practica: practicaStored})
     })
-
     res.redirect('/MostrPrac');
-})
-app.put('/api/params/:pId', (req,res) =>{
-
+    return;
 })
 
-app.delete('/api/params/:pId', (req,res) =>{
+app.post('/api/materia', (req,res) =>{
+    
+    console.log(req.body)
+    let materia = new Materia()
+    materia.nombre =  req.body.nombre
+    materia.sigla =  req.body.sigla
+    materia.save((err, materiaStored)=>{
+        if(err) res.status(500).send({message:`Error al guardar en la BD ${err}`})
+
+        res.status(200).send({materia: materiaStored})
+    })
+})
+
+app.put('/api/practicas/:pId', (req,res) =>{
 
 })
 
-mongoose.connect("mongodb://localhost:27017/GuiasLab", (err, res)=>{
-    if(err){
-        return console.log(`Èrror al conectar la base de datos: ${err}`)
-    }
-    console.log('Conectado a la BD')
+app.delete('/api/practicas/:pId', (req,res) =>{
+    let practicaId = req.params.practicaId
+
+    Practica.findById(practicaId,(err, practicas)=>{
+        if(err) res.status(500).send({message:`Error al borrar el producto ${err}`})
+   
+    practicas.remove(err =>{
+        if(err) res.status(500).send({message:`Error al borrar el producto ${err}`})
+        res.status(200).send({message:`El producto a sido elmininado`})
+        })
+    })
+})
+
 app.listen(app.get('port'),()=>{
     console.log(`servidor en puerto ${app.get('port')}`)
-})
-})
+});
+
+module.exports = app;

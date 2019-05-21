@@ -9,16 +9,16 @@
     </head>
 <body>
         <nav class="navbar navbar-dark bg-dark">
+                <a class="navbar-brand" href="/">Atras</a>
                 <a class="navbar-brand" href="EditText">Documento</a>
                 <a class="navbar-brand" href="EditCod">Codigo</a>
-                <a class="navbar-brand" href="/">Atras</a>
               </nav>
-          <%params.forEach(function(Params) { %>
+          <%practicas.forEach(function(practica) { %>
             <div class="card mx-auto" style="height: 90%; width:90%; margin-top: 30px; ">
-                    <h5 class="card-header"><%= Params.titulo%></h5>
+                    <h5 class="card-header"><%= practica.titulo%></h5>
                     <div class="card-body">
                       <h5 class="card-title">Contenido</h5>
-                      <p class="card-text"><%= Params.cuerpo%></p>
+                      <p class="card-text"><%= practica.texto%></p>
                       <a href="#" class="btn btn-primary">Mostrar Practica</a>
                     </div>
                 </div>
